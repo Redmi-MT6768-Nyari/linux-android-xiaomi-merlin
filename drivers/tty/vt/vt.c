@@ -3054,7 +3054,9 @@ static int __init con_init(void)
 #endif
 	return 0;
 }
+#if 0
 console_initcall(con_init);
+#endif
 
 static const struct tty_operations con_ops = {
 	.install = con_install,
