@@ -39,6 +39,8 @@
 
 #define LOG_INF(format, args...)    pr_err(PFX "[%s] " format, __func__, ##args)
 
+#define S5KGM1SP_CHIP_ID	0x5fb0
+
 static DEFINE_SPINLOCK(imgsensor_drv_lock);
 static struct imgsensor_info_struct imgsensor_info = {
 	.sensor_id = S5KGM1SP_SUNNY_SENSOR_ID,
@@ -851,8 +853,8 @@ static void night_mode(kal_bool enable)
 #if MULTI_WRITE
 kal_uint16 addr_data_pair_init_s5kgm1sp_sunny[] = {
 	0x6028, 0x4000,
-	0x0000, 0x0009,
-	0x0000, 0x08D1,
+	0x0000, 0x0002,
+	0x0000, 0xF8D1,
 	0x6010, 0x0001,
 	0x6214, 0x7971,
 	0x6218, 0x7150,
@@ -1503,9 +1505,8 @@ static void sensor_init(void)
 {
 	LOG_INF("E\n");
 	write_cmos_sensor(0x6028, 0x4000);
-	write_cmos_sensor(0x0000, 0x0009);
-	write_cmos_sensor(0x0000, 0x08D1);
-	write_cmos_sensor(0x6010, 0x0001);
+	write_cmos_sensor(0x0000, 0x0002);
+	write_cmos_sensor(0x0000, 0xF8D1);
 	mdelay(3);
 #if MULTI_WRITE
 //	LOG_INF("cxc s5kgm1sp sunny_sensor_init MULTI_WRITE\n");
@@ -2176,13 +2177,13 @@ static void preview_setting(void)
 	write_cmos_sensor(0x0352, 0x0000);
 	write_cmos_sensor(0x0340, 0x18F4);
 	write_cmos_sensor(0x0342, 0x09D0);
-	write_cmos_sensor(0x0900, 0x0121);
+	write_cmos_sensor(0x0900, 0x0111);
 	write_cmos_sensor(0x0380, 0x0001);
-	write_cmos_sensor(0x0382, 0x0003);
+	write_cmos_sensor(0x0382, 0x0001);
 	write_cmos_sensor(0x0384, 0x0001);
 	write_cmos_sensor(0x0386, 0x0001);
 	write_cmos_sensor(0x0404, 0x1000);
-	write_cmos_sensor(0x0402, 0x1020);
+	write_cmos_sensor(0x0402, 0x1010);
 	write_cmos_sensor(0x0136, 0x1800);
 	write_cmos_sensor(0x0304, 0x0006);
 	write_cmos_sensor(0x030C, 0x0000);
@@ -2191,7 +2192,7 @@ static void preview_setting(void)
 	write_cmos_sensor(0x0300, 0x0008);
 	write_cmos_sensor(0x030E, 0x0003);
 	write_cmos_sensor(0x0312, 0x0001);
-	write_cmos_sensor(0x0310, 0x0095);
+	write_cmos_sensor(0x0310, 0x0090);
 	write_cmos_sensor(0x6028, 0x2000);
 	write_cmos_sensor(0x602A, 0x1492);
 	write_cmos_sensor(0x6F12, 0x0078);
@@ -2527,9 +2528,9 @@ static void hs_video_setting(void)
 	write_cmos_sensor(0x0342, 0x09D0);
 	write_cmos_sensor(0x0900, 0x0122);
 	write_cmos_sensor(0x0380, 0x0001);
-	write_cmos_sensor(0x0382, 0x0003);
+	write_cmos_sensor(0x0382, 0x0001);
 	write_cmos_sensor(0x0384, 0x0001);
-	write_cmos_sensor(0x0386, 0x0003);
+	write_cmos_sensor(0x0386, 0x0001);
 	write_cmos_sensor(0x0404, 0x1000);
 	write_cmos_sensor(0x0402, 0x1010);
 	write_cmos_sensor(0x0136, 0x1800);
@@ -2540,7 +2541,7 @@ static void hs_video_setting(void)
 	write_cmos_sensor(0x0300, 0x0008);
 	write_cmos_sensor(0x030E, 0x0003);
 	write_cmos_sensor(0x0312, 0x0001);
-	write_cmos_sensor(0x0310, 0x0095);
+	write_cmos_sensor(0x0310, 0x0090);
 	write_cmos_sensor(0x6028, 0x2000);
 	write_cmos_sensor(0x602A, 0x1492);
 	write_cmos_sensor(0x6F12, 0x0078);
@@ -3228,22 +3229,22 @@ static void slim_video_setting(void)
 	write_cmos_sensor(0x0352, 0x0000);
 	write_cmos_sensor(0x0340, 0x0330);
 	write_cmos_sensor(0x0342, 0x13A0);
-	write_cmos_sensor(0x0900, 0x0123);
+	write_cmos_sensor(0x0900, 0x0111);
 	write_cmos_sensor(0x0380, 0x0001);
-	write_cmos_sensor(0x0382, 0x0002);
+	write_cmos_sensor(0x0382, 0x0001);
 	write_cmos_sensor(0x0384, 0x0001);
-	write_cmos_sensor(0x0386, 0x0005);
+	write_cmos_sensor(0x0386, 0x0001);
 	write_cmos_sensor(0x0404, 0x1000);
-	write_cmos_sensor(0x0402, 0x1810);
+	write_cmos_sensor(0x0402, 0x1010);
 	write_cmos_sensor(0x0136, 0x1800);
 	write_cmos_sensor(0x0304, 0x0006);
 	write_cmos_sensor(0x030C, 0x0000);
-	write_cmos_sensor(0x0306, 0x00F6);
+	write_cmos_sensor(0x0306, 0x00F1);
 	write_cmos_sensor(0x0302, 0x0001);
 	write_cmos_sensor(0x0300, 0x0008);
 	write_cmos_sensor(0x030E, 0x0003);
-	write_cmos_sensor(0x0312, 0x0002);
-	write_cmos_sensor(0x0310, 0x005B);
+	write_cmos_sensor(0x0312, 0x0001);
+	write_cmos_sensor(0x0310, 0x0090);
 	write_cmos_sensor(0x6028, 0x2000);
 	write_cmos_sensor(0x602A, 0x1492);
 	write_cmos_sensor(0x6F12, 0x0078);
@@ -3561,17 +3562,7 @@ static void slim_video_setting(void)
 
 static kal_uint32 return_sensor_id(void)
 {
-	return ((read_cmos_sensor_8(0x0000) << 8) | read_cmos_sensor_8(0x0001));
-}
-
-static kal_uint16 get_vendor_id(void)
-{
-	kal_uint16 get_byte = 0;
-	char pusendcmd[2] = { (char)(0x01 >> 8), (char)(0x01 & 0xFF) };
-
-	iReadRegI2C(pusendcmd, 2, (u8 *) &get_byte, 1, 0xA0);
-
-	return get_byte;
+	return ((read_cmos_sensor_8(0x0042) << 8) | read_cmos_sensor_8(0x0043));
 }
 
 static void custom1_setting(void)
@@ -3593,11 +3584,11 @@ static void custom1_setting(void)
 	write_cmos_sensor(0x0342, 0x09D2);
 	write_cmos_sensor(0x0900, 0x0121);
 	write_cmos_sensor(0x0380, 0x0001);
-	write_cmos_sensor(0x0382, 0x0003);
+	write_cmos_sensor(0x0382, 0x0001);
 	write_cmos_sensor(0x0384, 0x0001);
 	write_cmos_sensor(0x0386, 0x0001);
 	write_cmos_sensor(0x0404, 0x1000);
-	write_cmos_sensor(0x0402, 0x1020);
+	write_cmos_sensor(0x0402, 0x1010);
 	write_cmos_sensor(0x0136, 0x1800);
 	write_cmos_sensor(0x0304, 0x0006);
 	write_cmos_sensor(0x030C, 0x0000);
@@ -3606,7 +3597,7 @@ static void custom1_setting(void)
 	write_cmos_sensor(0x0300, 0x0008);
 	write_cmos_sensor(0x030E, 0x0003);
 	write_cmos_sensor(0x0312, 0x0001);
-	write_cmos_sensor(0x0310, 0x0095);
+	write_cmos_sensor(0x0310, 0x0090);
 	write_cmos_sensor(0x6028, 0x2000);
 	write_cmos_sensor(0x602A, 0x1492);
 	write_cmos_sensor(0x6F12, 0x0078);
@@ -3939,22 +3930,22 @@ static void custom2_setting(void)
 	write_cmos_sensor(0x0352, 0x0000);
 	write_cmos_sensor(0x0340, 0x0330);
 	write_cmos_sensor(0x0342, 0x13A0);
-	write_cmos_sensor(0x0900, 0x0123);
+	write_cmos_sensor(0x0900, 0x0111);
 	write_cmos_sensor(0x0380, 0x0001);
-	write_cmos_sensor(0x0382, 0x0002);
+	write_cmos_sensor(0x0382, 0x0001);
 	write_cmos_sensor(0x0384, 0x0001);
-	write_cmos_sensor(0x0386, 0x0005);
+	write_cmos_sensor(0x0386, 0x0001);
 	write_cmos_sensor(0x0404, 0x1000);
-	write_cmos_sensor(0x0402, 0x1810);
+	write_cmos_sensor(0x0402, 0x1010);
 	write_cmos_sensor(0x0136, 0x1800);
 	write_cmos_sensor(0x0304, 0x0006);
 	write_cmos_sensor(0x030C, 0x0000);
-	write_cmos_sensor(0x0306, 0x00F6);
+	write_cmos_sensor(0x0306, 0x00F1);
 	write_cmos_sensor(0x0302, 0x0001);
 	write_cmos_sensor(0x0300, 0x0008);
 	write_cmos_sensor(0x030E, 0x0003);
-	write_cmos_sensor(0x0312, 0x0002);
-	write_cmos_sensor(0x0310, 0x005B);
+	write_cmos_sensor(0x0312, 0x0001);
+	write_cmos_sensor(0x0310, 0x0090);
 	write_cmos_sensor(0x6028, 0x2000);
 	write_cmos_sensor(0x602A, 0x1492);
 	write_cmos_sensor(0x6F12, 0x0078);
@@ -4290,39 +4281,28 @@ extern int hbb_flag;
 static kal_uint32 get_imgsensor_id(UINT32 *sensor_id)
 {
 	kal_uint8 i = 0;
-	kal_uint8 retry = 2, vendor_id = 0;
-
-	vendor_id = get_vendor_id();
+	kal_uint8 retry = 2;
+	kal_uint32 chip_id = 0;
 	while (imgsensor_info.i2c_addr_table[i] != 0xff) {
 		spin_lock(&imgsensor_drv_lock);
 		imgsensor.i2c_write_id = imgsensor_info.i2c_addr_table[i];
 		spin_unlock(&imgsensor_drv_lock);
 		do {
-			if (vendor_id == 0x01) {
-				*sensor_id = return_sensor_id() + 1;
-				if (*sensor_id == imgsensor_info.sensor_id) {
-					pr_info
-			("s5kg sunny i2cid: 0x%x, sid: 0x%x vid: 0x%x\n",
-			 imgsensor.i2c_write_id, *sensor_id, vendor_id);
-					return ERROR_NONE;
-
-				} else {
-					pr_err
-		("check id fail i2c 0x%x, sid: 0x%x vd: 0x%x\n",
-					 imgsensor.i2c_write_id,
-					 *sensor_id, vendor_id);
-					*sensor_id = 0xFFFFFFFF;
-				}
-				LOG_INF
-		("i2c id: 0x%x, ReadOut sid: 0x%x, info.sensor_id:0x%x.\n",
-				 imgsensor.i2c_write_id, *sensor_id,
-				 imgsensor_info.sensor_id);
-
+			chip_id = return_sensor_id();
+			if (chip_id == S5KGM1SP_CHIP_ID) {
+				*sensor_id = imgsensor_info.sensor_id;
+				pr_info
+			("s5kg sunny i2cid: 0x%x, chip: 0x%x sid: 0x%x\n",
+			 imgsensor.i2c_write_id, chip_id, *sensor_id);
+				return ERROR_NONE;
 			}
+			pr_err
+		("check id fail i2c 0x%x, chip: 0x%x sid: 0x%x\n",
+			 imgsensor.i2c_write_id, chip_id, imgsensor_info.sensor_id);
+			*sensor_id = 0xFFFFFFFF;
 			LOG_INF
-		("Read fail, i2cid: 0x%x, Rsid: 0x%x, info.sid:0x%x.\n",
-			 imgsensor.i2c_write_id, *sensor_id,
-			 imgsensor_info.sensor_id);
+		("Read fail, i2cid: 0x%x, chip: 0x%x, info.sid:0x%x.\n",
+			 imgsensor.i2c_write_id, chip_id, imgsensor_info.sensor_id);
 			retry--;
 		} while (retry > 0);
 		i++;
@@ -4357,31 +4337,31 @@ static kal_uint32 open(void)
 
 	kal_uint8 i = 0;
 	kal_uint8 retry = 2;
-	kal_uint32 sensor_id = 0;
+	kal_uint32 chip_id = 0;
 
 	while (imgsensor_info.i2c_addr_table[i] != 0xff) {
 		spin_lock(&imgsensor_drv_lock);
 		imgsensor.i2c_write_id = imgsensor_info.i2c_addr_table[i];
 		spin_unlock(&imgsensor_drv_lock);
 		do {
-			sensor_id = return_sensor_id() + 1;
-			if (sensor_id == imgsensor_info.sensor_id) {
+			chip_id = return_sensor_id();
+			if (chip_id == S5KGM1SP_CHIP_ID) {
 				LOG_INF
-				("i2c write id: 0x%x, sensor id: 0x%x\n",
-				 imgsensor.i2c_write_id, sensor_id);
+				("i2c write id: 0x%x, chip id: 0x%x\n",
+				 imgsensor.i2c_write_id, chip_id);
 				break;
 			}
 			LOG_INF
-			("Read sensor id fail, id: 0x%x, sensor id: 0x%x\n",
-			 imgsensor.i2c_write_id, sensor_id);
+			("Read chip id fail, id: 0x%x, chip id: 0x%x\n",
+			 imgsensor.i2c_write_id, chip_id);
 			retry--;
 		} while (retry > 0);
 		i++;
-		if (sensor_id == imgsensor_info.sensor_id)
+		if (chip_id == S5KGM1SP_CHIP_ID)
 			break;
 		retry = 2;
 	}
-	if (imgsensor_info.sensor_id != sensor_id)
+	if (S5KGM1SP_CHIP_ID != chip_id)
 		return ERROR_SENSOR_CONNECT_FAIL;
 
 	sensor_init();
