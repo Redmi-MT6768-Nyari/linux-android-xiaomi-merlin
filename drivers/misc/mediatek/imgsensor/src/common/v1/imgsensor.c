@@ -659,7 +659,7 @@ static inline int adopt_CAMERA_HW_GetInfo(void *pBuf)
                 curr_idx = IMGSENSOR_SENSOR_IDX_SUB;
         }
         else if (curr_idx == IMGSENSOR_SENSOR_IDX_SUB2) {
-                curr_idx = IMGSENSOR_SENSOR_IDX_MAIN2;
+                curr_idx = IMGSENSOR_SENSOR_IDX_MAIN;
         }
 	psensor = imgsensor_sensor_get_inst(curr_idx);
 	// HACK
@@ -862,7 +862,7 @@ static inline int adopt_CAMERA_HW_GetInfo2(void *pBuf)
                 curr_idx = IMGSENSOR_SENSOR_IDX_SUB;
         }
         else if (curr_idx == IMGSENSOR_SENSOR_IDX_SUB2) {
-                curr_idx = IMGSENSOR_SENSOR_IDX_MAIN2;
+                curr_idx = IMGSENSOR_SENSOR_IDX_MAIN;
         }
 	psensor = imgsensor_sensor_get_inst(curr_idx);
 	// HACK
@@ -1316,7 +1316,7 @@ static inline int adopt_CAMERA_HW_FeatureControl(void *pBuf)
 		if (curr_idx == IMGSENSOR_SENSOR_IDX_MAIN3) {
 			curr_idx = IMGSENSOR_SENSOR_IDX_SUB;
 		} else if (curr_idx == IMGSENSOR_SENSOR_IDX_SUB2) {
-			curr_idx = IMGSENSOR_SENSOR_IDX_MAIN2;
+			curr_idx = IMGSENSOR_SENSOR_IDX_MAIN;
 		}
 		psensor = imgsensor_sensor_get_inst(curr_idx);
 		// HACK
